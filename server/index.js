@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
+import leadRoutes from './routes/leads.js';
 
 if (!process.env.JWT_SECRET) {
   console.error('JWT_SECRET is not set in .env');
@@ -12,6 +13,9 @@ if (!process.env.JWT_SECRET) {
 }
 
 const app = express();
+
+// Needed so rate limiting sees the real client IP behind Codespaces/Render/Vercel proxies
+app.set('trust proxy', 1);
 
 const allowedOrigins = (process.env.CLIENT_URL || '').split(',').map((s) => s.trim());
 
@@ -29,6 +33,7 @@ app.use(morgan('dev'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', app: 'BritPath API' }));
 app.use('/api/auth', authRoutes);
+app.use('/api/leads', leadRoutes);
 
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
