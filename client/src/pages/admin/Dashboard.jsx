@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext.jsx';
+import AdminHeader from '../../components/admin/AdminHeader.jsx';
 import StatsStrip from '../../components/admin/StatsStrip.jsx';
 import PipelineBoard from '../../components/admin/PipelineBoard.jsx';
 import LeadDetail from '../../components/admin/LeadDetail.jsx';
 
 export default function Dashboard() {
-  const { user, logout, request } = useAuth();
+  const { request } = useAuth();
 
   const [leads, setLeads] = useState([]);
   const [total, setTotal] = useState(0);
@@ -99,26 +99,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="bg-navy-900 text-white">
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-4">
-            <span className="font-display text-xl tracking-wide text-gold-400">THE BRITPATH</span>
-            <span className="hidden text-sm text-slate-300 sm:inline">Admin</span>
-          </div>
-          <div className="flex items-center gap-4 text-sm">
-            <span className="hidden text-slate-300 sm:inline">{user?.name}</span>
-            <Link to="/" className="text-slate-300 hover:text-gold-300">
-              View site
-            </Link>
-            <button
-              onClick={logout}
-              className="rounded-full border border-gold-400 px-4 py-1.5 text-gold-300 hover:bg-navy-700"
-            >
-              Log out
-            </button>
-          </div>
-        </div>
-      </header>
+      <AdminHeader />
 
       <main className="mx-auto max-w-[1600px] space-y-4 px-4 py-6">
         <StatsStrip stats={stats} />

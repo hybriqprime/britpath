@@ -41,11 +41,18 @@ export function AuthProvider({ children }) {
     };
   }, [token, logout]);
 
-  const login = useCallback(async (email, password) => {
+  // role: 'admin' for /admin/login, 'client' for /portal/login
+  const login = useCallback(async (email, password, role = 'admin') => {
     const data = await api('/auth/login', { method: 'POST', body: { email, password } });
-    if (data.user.role !== 'admin') {
-      throw new Error('This area is for BritPath staff only.');
+
+    if (data.user.role !== role) {
+      throw new Error(
+        role === 'admin'
+          ? 'This area is for BritPath staff only.'
+          : 'This page is for clients. Staff please use the admin sign in.'
+      );
     }
+
     localStorage.setItem(KEY, data.token);
     setUser(data.user);
     setToken(data.token);

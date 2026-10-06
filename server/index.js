@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import leadRoutes from './routes/leads.js';
+import clientRoutes from './routes/clients.js';
+import portalRoutes from './routes/portal.js';
 
 if (!process.env.JWT_SECRET) {
   console.error('JWT_SECRET is not set in .env');
@@ -34,6 +36,8 @@ app.use(morgan('dev'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok', app: 'BritPath API' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/portal', portalRoutes);
 
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
