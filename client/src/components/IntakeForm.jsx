@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api.js';
 import { WHATSAPP_URL } from '../config.js';
 
@@ -277,7 +278,16 @@ export default function IntakeForm() {
         />
         <span>
           I agree that The BritPath may contact me about my enquiry and store my details for that
-          purpose.
+          purpose. I have read the{' '}
+          <Link to="/privacy" target="_blank" className="text-brit-navy underline">
+            Privacy Policy
+          </Link>{' '}
+          and{' '}
+          <Link to="/terms" target="_blank" className="text-brit-navy underline">
+            Terms
+          </Link>
+          . I understand The BritPath gives guidance and not regulated immigration advice, and does
+          not guarantee outcomes.
         </span>
       </label>
 
