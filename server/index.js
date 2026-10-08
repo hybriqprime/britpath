@@ -12,6 +12,7 @@ import clientRoutes from './routes/clients.js';
 import portalRoutes from './routes/portal.js';
 import activityRoutes from './routes/activity.js';
 import { auditDocumentAccess, auditWrites } from './middleware/audit.js';
+import { protect, requirePasswordChanged } from './middleware/auth.js';
 
 if (!process.env.JWT_SECRET) {
   console.error('JWT_SECRET is not set in .env');
@@ -51,6 +52,9 @@ app.use('/api/clients/:id/documents/:docId/url', auditDocumentAccess);
 app.use('/api/portal/documents/:docId/url', auditDocumentAccess);
 app.use('/api/clients', auditWrites);
 app.use('/api/portal', auditWrites);
+
+// Clients on a temporary password are locked out of the portal API until they change it
+app.use('/api/portal', protect, requirePasswordChanged);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/leads', leadRoutes);

@@ -33,3 +33,14 @@ export const requireRole =
     }
     next();
   };
+
+// Clients still on a temporary password may only change it
+export const requirePasswordChanged = (req, res, next) => {
+  if (req.user?.role === 'client' && req.user.mustChangePassword) {
+    return res.status(403).json({
+      code: 'PASSWORD_CHANGE_REQUIRED',
+      message: 'Please set a new password first.',
+    });
+  }
+  next();
+};

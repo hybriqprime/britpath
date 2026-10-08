@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext.jsx';
 
 export default function Login() {
@@ -34,8 +34,9 @@ export default function Login() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-navy-900 px-4">
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
-        <p className="text-center font-display text-2xl tracking-wide text-navy-900">
-          THE BRITPATH
+        <p className="text-center text-2xl font-extrabold tracking-tight">
+          <span className="text-brit-navy">BRIT</span>
+          <span className="text-brit-red">PATH</span>
         </p>
         <p className="mt-1 text-center text-sm text-slate-500">Staff sign in</p>
 
@@ -84,6 +85,12 @@ export default function Login() {
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
+
+        <p className="mt-5 text-center text-xs text-slate-500">
+          <Link to="/forgot-password" className="underline">
+            Forgot your password?
+          </Link>
+        </p>
       </div>
     </div>
   );

@@ -71,9 +71,16 @@ export function AuthProvider({ children }) {
     [token, logout]
   );
 
+  // Re-reads the signed-in user (for example after a password change)
+  const refresh = useCallback(async () => {
+    const d = await api('/auth/me', { token });
+    setUser(d.user);
+    return d.user;
+  }, [token]);
+
   const value = useMemo(
-    () => ({ user, token, ready, login, logout, request }),
-    [user, token, ready, login, logout, request]
+    () => ({ user, token, ready, login, logout, request, refresh }),
+    [user, token, ready, login, logout, request, refresh]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

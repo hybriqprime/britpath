@@ -34,8 +34,9 @@ export default function PortalLogin() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-navy-900 px-4">
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
-        <p className="text-center font-display text-2xl tracking-wide text-navy-900">
-          THE BRITPATH
+        <p className="text-center text-2xl font-extrabold tracking-tight">
+          <span className="text-brit-navy">BRIT</span>
+          <span className="text-brit-red">PATH</span>
         </p>
         <p className="mt-1 text-center text-sm text-slate-500">Client portal</p>
 
@@ -86,8 +87,11 @@ export default function PortalLogin() {
         </form>
 
         <p className="mt-5 text-center text-xs text-slate-500">
-          Forgot your password? Message us on WhatsApp and we will reset it.{' '}
-          <Link to="/" className="text-navy-900 underline">
+          <Link to="/forgot-password" className="underline">
+            Forgot your password?
+          </Link>
+          {' · '}
+          <Link to="/" className="underline">
             Back to site
           </Link>
         </p>

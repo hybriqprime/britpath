@@ -8,12 +8,17 @@ import Clients from './pages/admin/Clients.jsx';
 import ClientDetail from './pages/admin/ClientDetail.jsx';
 import PortalLogin from './pages/portal/PortalLogin.jsx';
 import Portal from './pages/portal/Portal.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Landing />} />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route path="/admin/login" element={<Login />} />
         <Route element={<ProtectedRoute role="admin" />}>
