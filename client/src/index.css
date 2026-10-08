@@ -9,6 +9,8 @@
   --color-gold-400: #d8b872;
   --color-gold-500: #c9a45c;
   --color-gold-600: #a98343;
+  --color-brit-navy: #12266e;
+  --color-brit-red: #c8102e;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
 }
@@ -22,4 +24,89 @@ body {
   background: #ffffff;
   color: #1e293b;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Hero: one orchestrated entrance */
+.hero-in {
+  opacity: 0;
+  animation: heroIn 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-logo {
+  animation: logoWipe 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both,
+    floaty 7s ease-in-out 1.6s infinite;
+}
+@keyframes logoWipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.hero-route {
+  animation: routeMove 4s linear infinite;
+}
+@keyframes routeMove {
+  to { stroke-dashoffset: -72; }
+}
+
+/* Illustrations: one quiet ambient motion each */
+.a-float { animation: floaty 5s ease-in-out infinite; }
+.a-float2 { animation: floaty 6s ease-in-out -2.5s infinite; }
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.a-swing {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: swing 2.8s ease-in-out infinite;
+}
+@keyframes swing {
+  0%, 100% { transform: rotate(9deg); }
+  50% { transform: rotate(-9deg); }
+}
+.a-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 3.6s ease-in-out infinite;
+}
+@keyframes draw {
+  0% { stroke-dashoffset: 1; }
+  35%, 85% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 1; }
+}
+.a-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pop 3.6s ease-in-out infinite;
+}
+@keyframes pop {
+  0%, 100% { transform: scale(0.88) rotate(-8deg); opacity: 0.75; }
+  50% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.a-fly { animation: fly 6s ease-in-out infinite; }
+@keyframes fly {
+  0%, 100% { transform: translate(-14px, 5px); }
+  50% { transform: translate(14px, -5px); }
+}
+.a-dash { animation: routeMove 4s linear infinite; }
+.a-glow { animation: glow 3.2s ease-in-out infinite; }
+@keyframes glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.a-spin { animation: spin 14s linear infinite; }
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero-in { opacity: 1; }
+  .a-draw { stroke-dashoffset: 0; }
 }

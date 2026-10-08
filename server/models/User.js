@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true, minlength: 8, select: false },
     role: { type: String, enum: ['admin', 'client'], default: 'client' },
     isActive: { type: Boolean, default: true },
+    // Bumping this signs the account out of every device
+    tokenVersion: { type: Number, default: 0 },
+    lastLoginAt: { type: Date },
   },
   { timestamps: true }
 );
@@ -22,6 +25,8 @@ const userSchema = new mongoose.Schema(
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
+  // A changed password revokes existing sessions, unless the owner changed it themselves
+  if (!this.isNew && !this.$locals.selfChange) this.tokenVersion += 1;
   next();
 });
 
