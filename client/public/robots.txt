@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin
+Disallow: /portal
+Disallow: /reset-password
+Sitemap: https://thebritpath.com/sitemap.xml
