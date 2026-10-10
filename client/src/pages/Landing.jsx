@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar.jsx';
 import Hero from '../components/Hero.jsx';
 import Services from '../components/Services.jsx';
+import FounderMedia from '../components/FounderMedia.jsx';
 import IntakeForm from '../components/IntakeForm.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -42,19 +43,33 @@ export default function Landing() {
               </div>
             ))}
           </div>
+
+          <FounderMedia />
         </div>
       </section>
 
-      <section id="apply" className="bg-slate-50 py-16">
+      <section id="apply" className="relative isolate overflow-hidden bg-slate-50 py-16">
+        {/* Background photo: tinted, softened and faded into the page so the form stays readable */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <img
+            src="/media/founder-session.jpg"
+            alt=""
+            loading="lazy"
+            className="h-full w-full scale-110 object-cover object-[50%_55%] blur-[3px]"
+          />
+          <div className="absolute inset-0 bg-navy-900/75" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/30 to-slate-50" />
+        </div>
+
         <div className="mx-auto max-w-3xl px-4">
-          <h2 className="text-center font-display text-3xl font-bold text-navy-900 md:text-4xl">
+          <h2 className="text-center font-display text-3xl font-bold text-white md:text-4xl">
             Start with a free profile review
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-center text-slate-600">
+          <p className="mx-auto mt-3 max-w-xl text-center text-slate-200">
             Tell us a little about your plans. We will review your answers and contact you on
             WhatsApp with the best next step.
           </p>
-          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-xl backdrop-blur md:p-8">
             <IntakeForm />
           </div>
         </div>
