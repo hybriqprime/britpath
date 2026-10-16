@@ -27,7 +27,7 @@ export default function FounderMedia() {
           aria-label={`${FOUNDER.name} speaking to students`}
           className="aspect-[9/16] w-56 rounded-2xl border-2 border-gold-500/40 bg-navy-950 object-cover shadow-2xl sm:w-64 md:w-72"
         >
-          <source src="/media/founder-talk.mp4" type="video/mp4" />
+          <source src="/media/founder-talk-v2.mp4" type="video/mp4" />
         </video>
       </div>
     </div>
