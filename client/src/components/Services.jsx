@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import ServiceArt from './ServiceArt.jsx';
 
+// Change this number whenever you replace any image in public/services
+const IMG_VERSION = 2;
+
 const services = [
   { id: 'school', title: 'School & Admission', items: ['Profile assessment', 'University research & selection', 'Application guidance', 'Admission process'] },
   { id: 'cas', title: 'CAS & Pre-Visa', items: ['Documentation guidance', 'Proof of funds strategy', 'Document review', 'Pre-CAS support'] },
@@ -28,7 +31,7 @@ function ServiceImage({ id, title }) {
       <ServiceArt name={id} />
       <img
         ref={ref}
-        src={`/services/${id}.jpg`}
+        src={`/services/${id}.jpg?v=${IMG_VERSION}`}
         alt={ok ? title : ''}
         onLoad={() => setOk(true)}
         onError={() => setOk(false)}
